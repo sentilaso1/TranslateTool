@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using GameTranslator.Core.Services;
+using GameTranslator.Core.Models;
 
 namespace GameTranslator.Infrastructure.Services
 {
@@ -17,16 +18,17 @@ namespace GameTranslator.Infrastructure.Services
             _cache = cache;
         }
 
-        public async Task<string> TranslateAsync(string text, string targetLanguage)
+        public async Task<string> TranslateAsync(TextContext context, string targetLanguage)
         {
-            var cacheKey = $"{text}_{targetLanguage}";
+            var cacheKey = $"{context.SourceText}_{context.Context}_{targetLanguage}";
             var cached = await _cache.GetAsync(cacheKey);
             if (cached != null)
             {
                 return cached;
             }
 
-            var response = await _httpClient.GetAsync($"https://api.example.com/translate?text={Uri.EscapeDataString(text)}&lang={targetLanguage}");
+            var query = $"https://api.example.com/translate?text={Uri.EscapeDataString(context.SourceText)}&lang={targetLanguage}&context={Uri.EscapeDataString(context.Context)}";
+            var response = await _httpClient.GetAsync(query);
             response.EnsureSuccessStatusCode();
             var result = await response.Content.ReadAsStringAsync();
             var doc = JsonDocument.Parse(result);
