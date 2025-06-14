@@ -1,0 +1,9 @@
+# Ignore build outputs
+bin/
+obj/
+# Rider and VS caches
+*.user
+*.suo
+*.userprefs
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets

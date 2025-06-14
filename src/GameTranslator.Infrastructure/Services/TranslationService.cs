@@ -34,5 +34,17 @@ namespace GameTranslator.Infrastructure.Services
             await _cache.SetAsync(cacheKey, translated);
             return translated;
         }
+
+        /// <summary>
+        /// Translates a phrase using additional context to improve result quality.
+        /// </summary>
+        /// <param name="previousText">Previously translated text that provides context.</param>
+        /// <param name="text">Current text to translate.</param>
+        /// <param name="targetLanguage">Target language code.</param>
+        public async Task<string> TranslateWithContextAsync(string previousText, string text, string targetLanguage)
+        {
+            var combined = string.IsNullOrWhiteSpace(previousText) ? text : previousText + "\n" + text;
+            return await TranslateAsync(combined, targetLanguage);
+        }
     }
 }

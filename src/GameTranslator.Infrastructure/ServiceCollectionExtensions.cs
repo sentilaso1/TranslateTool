@@ -12,7 +12,7 @@ namespace GameTranslator.Infrastructure
             services.AddSingleton<HttpClient>();
             services.AddSingleton<ICacheService, MemoryCacheService>();
             services.AddSingleton<ITranslationService, TranslationService>();
-            services.AddSingleton<ITextCaptureService, OcrTextCaptureService>();
+            services.AddSingleton<ITextCaptureService, TesseractTextCaptureService>();
             return services;
         }
     }
