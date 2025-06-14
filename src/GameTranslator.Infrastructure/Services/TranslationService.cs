@@ -26,7 +26,18 @@ namespace GameTranslator.Infrastructure.Services
                 return cached;
             }
 
-            var response = await _httpClient.GetAsync($"https://api.example.com/translate?text={Uri.EscapeDataString(text)}&lang={targetLanguage}");
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://libretranslate.de/translate")
+            {
+                Content = new StringContent(JsonSerializer.Serialize(new
+                {
+                    q = text,
+                    source = "auto",
+                    target = targetLanguage,
+                    format = "text"
+                }), System.Text.Encoding.UTF8, "application/json")
+            };
+
+            var response = await _httpClient.SendAsync(request);
             response.EnsureSuccessStatusCode();
             var result = await response.Content.ReadAsStringAsync();
             var doc = JsonDocument.Parse(result);
