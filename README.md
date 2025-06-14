@@ -2,6 +2,8 @@
 
 This repository provides a skeleton for a real-time game translation tool written in **C#** using WPF and the MVVM architecture. The solution includes separate projects for the application UI, core interfaces, infrastructure services, and unit tests.
 
+The latest update introduces a lightweight overlay window inspired by the [Translumo](https://github.com/Danily07/Translumo) project. Translations are now performed with additional context information to improve accuracy and are displayed directly over the game.
+
 ## Projects
 - **GameTranslator.App** - WPF front-end application.
 - **GameTranslator.Core** - Core abstractions and models.
