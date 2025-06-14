@@ -1,5 +1,7 @@
 using System;
 using System.Net.Http;
+using System.Net;
+using System.Text.RegularExpressions;
 using System.Text.Json;
 using System.Threading.Tasks;
 using GameTranslator.Core.Services;
@@ -26,22 +28,13 @@ namespace GameTranslator.Infrastructure.Services
                 return cached;
             }
 
-            var request = new HttpRequestMessage(HttpMethod.Post, "https://libretranslate.de/translate")
-            {
-                Content = new StringContent(JsonSerializer.Serialize(new
-                {
-                    q = text,
-                    source = "auto",
-                    target = targetLanguage,
-                    format = "text"
-                }), System.Text.Encoding.UTF8, "application/json")
-            };
-
-            var response = await _httpClient.SendAsync(request);
+            var url = $"https://translate.google.com/m?hl={targetLanguage}&sl=auto&tl={targetLanguage}&ie=UTF-8&prev=_m&q={Uri.EscapeDataString(text)}";
+            var response = await _httpClient.GetAsync(url);
             response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadAsStringAsync();
-            var doc = JsonDocument.Parse(result);
-            var translated = doc.RootElement.GetProperty("translatedText").GetString() ?? string.Empty;
+            var html = await response.Content.ReadAsStringAsync();
+            var match = Regex.Match(html, "(?<=<div[^>]*class=\"result-container\"[^>]*>)[\\s\\S]*?(?=</div>)", RegexOptions.IgnoreCase);
+            var translated = match.Success ? WebUtility.HtmlDecode(match.Value) : string.Empty;
+
             await _cache.SetAsync(cacheKey, translated);
             return translated;
         }
