@@ -11,8 +11,10 @@ namespace GameTranslator.Infrastructure
         {
             services.AddSingleton<HttpClient>();
             services.AddSingleton<ICacheService, MemoryCacheService>();
-            services.AddSingleton<ITranslationService, TranslationService>();
+            services.AddSingleton<ITranslationService, GoogleTranslationService>();
             services.AddSingleton<ITextCaptureService, OcrTextCaptureService>();
+            services.AddSingleton<IOverlayService, OverlayService>();
+            services.AddSingleton<IContextService, TextContextService>();
             return services;
         }
     }
