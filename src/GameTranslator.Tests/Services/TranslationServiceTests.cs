@@ -23,6 +23,18 @@ namespace GameTranslator.Tests.Services
             Assert.Equal("hi", result);
             cacheMock.Verify(c => c.GetAsync("hello_en"), Times.Once);
         }
+
+        [Fact]
+        public async Task TranslateWithContextAsync_CombinesInput()
+        {
+            var cache = new MemoryCacheService();
+            var httpClient = new HttpClient(new HttpMessageHandlerStub());
+            var service = new TranslationService(httpClient, cache);
+
+            var result = await service.TranslateWithContextAsync("hello", "world", "en");
+
+            Assert.Equal("hi", result);
+        }
     }
 
     internal class HttpMessageHandlerStub : HttpMessageHandler
