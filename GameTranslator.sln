@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameTranslator.App", "src\GameTranslator.App\GameTranslator.App.csproj", "{398C8677-ED37-484C-A77E-2DA4AE59A1A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameTranslator.Core", "src\GameTranslator.Core\GameTranslator.Core.csproj", "{BB9498EA-D05B-4110-8093-0716173F476E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameTranslator.Infrastructure", "src\GameTranslator.Infrastructure\GameTranslator.Infrastructure.csproj", "{F38EAA3E-257F-40F6-BACC-745668D85F61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameTranslator.Tests", "src\GameTranslator.Tests\GameTranslator.Tests.csproj", "{E618298B-CD68-47FC-AB64-4B00B1A32DAF}"
+EndProject
+Global
+    GlobalSection(SolutionConfigurationPlatforms) = preSolution
+        Debug|Any CPU = Debug|Any CPU
+        Release|Any CPU = Release|Any CPU
+    EndGlobalSection
+    GlobalSection(SolutionProperties) = preSolution
+        HideSolutionNode = FALSE
+    EndGlobalSection
+EndGlobal

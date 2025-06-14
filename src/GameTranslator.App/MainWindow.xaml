@@ -1,0 +1,5 @@
+<Window x:Class="GameTranslator.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="Game Translator" Height="350" Width="525">
+    <Grid>
+        <TextBlock Text="Real-time Game Translator" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+</Window>
