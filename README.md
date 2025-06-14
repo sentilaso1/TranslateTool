@@ -17,3 +17,7 @@ This repository provides a skeleton for a real-time game translation tool writte
 ```
 
 The solution targets **.NET 8**. WPF applications require Windows to run; building on non-Windows hosts may need the Windows desktop SDK.
+
+## Recent updates
+- Added overlay window to display translated text over the game.
+- Integrated a simple Google Translate based service.
