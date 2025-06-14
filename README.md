@@ -17,3 +17,6 @@ This repository provides a skeleton for a real-time game translation tool writte
 ```
 
 The solution targets **.NET 8**. WPF applications require Windows to run; building on non-Windows hosts may need the Windows desktop SDK.
+
+## Overlay Service
+A lightweight overlay window now displays translated text above the game. The `IOverlayService` is registered via dependency injection and can be used to show or hide translations with minimal latency.
